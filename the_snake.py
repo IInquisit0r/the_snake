@@ -1,3 +1,4 @@
+"""Змейка на PyGame"""
 from random import randint
 
 import pygame
@@ -39,7 +40,6 @@ pygame.display.set_caption("Змейка")
 clock = pygame.time.Clock()
 
 
-# Тут опишите все классы игры.
 class GameObject:
     """Базовый класс игровых объектов."""
 
@@ -50,6 +50,7 @@ class GameObject:
 
     def draw(self):
         """Отрисовывает игровой объект."""
+        pass
 
 
 class Apple(GameObject):
