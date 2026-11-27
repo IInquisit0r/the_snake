@@ -14,6 +14,7 @@ EXPECTED_GAME_OBJECT_ATTRS = (
     ids=[elem[1] for elem in EXPECTED_GAME_OBJECT_ATTRS]
 )
 def test_game_object_attributes(game_object, attr_type, attr_name):
+    """Проверяет, что у объектов класса `GameObject` определены необходимые атрибуты и методы."""
     assert hasattr(game_object, attr_name), (
         f'Убедитесь, что у объектов класса `GameObject` определен {attr_type} '
         f'`{attr_name}`.'
@@ -29,6 +30,7 @@ EXPECTED_APPLE_ATTRS = (
 
 
 def test_apple_inherits_from_game_object(_the_snake):
+    """Проверяет, что класс `Apple` наследуется от класса `GameObject`."""
     assert issubclass(_the_snake.Apple, _the_snake.GameObject), (
         'Класс `Apple` должен наследоваться от класса `GameObject`.'
     )
@@ -60,6 +62,7 @@ EXPECTED_SNAKE_ATTRS = (
 
 
 def test_snake_inherits_from_game_object(_the_snake):
+    """Проверяет, что класс `Snake` наследуется от класса `GameObject`."""
     assert issubclass(_the_snake.Snake, _the_snake.GameObject), (
         'Класс `Snake` должен наследоваться от класса `GameObject`.'
     )
@@ -71,6 +74,7 @@ def test_snake_inherits_from_game_object(_the_snake):
     ids=[elem[1] for elem in EXPECTED_SNAKE_ATTRS]
 )
 def test_snake_attributes(snake, attr_type, attr_name):
+    """Проверяет, что у объектов класса `Snake` определены необходимые атрибуты и методы."""
     assert hasattr(snake, attr_name), (
         f'Убедитесь, что у объектов класса `Snake` определен {attr_type} '
         f'`{attr_name}`.'
@@ -101,6 +105,7 @@ EXPECTED_MODULE_ELEMENTS = (
     ids=[elem[1] for elem in EXPECTED_MODULE_ELEMENTS]
 )
 def test_elements_exist(element_type, element_name, _the_snake):
+    """Проверяет, что в модуле `the_snake` определены необходимые константы, переменные и функции."""
     assert hasattr(_the_snake, element_name), (
         f'Убедитесь, что в модуле `the_snake` определена {element_type} '
         f'`{element_name}`.'
@@ -115,6 +120,7 @@ def test_elements_exist(element_type, element_name, _the_snake):
     ),
 )
 def test_vars_type(expected_type, var_name, _the_snake):
+    """Проверяет, что переменные `screen` и `clock` имеют правильный тип."""
     assert isinstance(getattr(_the_snake, var_name, None), expected_type), (
         'Убедитесь, что в модуле `the_snake` есть переменная '
         f'`{var_name}` типа `{expected_type.__name__}`.'
@@ -126,6 +132,7 @@ def test_vars_type(expected_type, var_name, _the_snake):
     ('handle_keys', 'main'),
 )
 def test_vars_are_functions(func_name, _the_snake):
+    """Проверяет, что переменные `handle_keys` и `main` являются функциями."""
     assert callable(getattr(_the_snake, func_name, None)), (
         f'Убедитесь, что переменная `{func_name}` - это функция.'
     )
