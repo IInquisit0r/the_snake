@@ -1,6 +1,7 @@
-from random import choice, randint
+from random import choice, randint, random
 
 import pygame
+from pygame import rect
 
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
@@ -52,6 +53,26 @@ class GameObject:
         """Отрисовывает игровой объект."""
         pass
 
+class Apple (GameObject):
+    """Класс яблока."""
+
+    def __init__(self):
+        """Инициализирует яблоко."""
+        super().__init__()
+        self.body_color = APPLE_COLOR
+        self.randomize_position()
+
+    def randomize_position(self):
+        """Случайным образом изменяет позицию яблока."""
+        x = randint(0, 31) * GRID_SIZE
+        y = randint(0, 23) * GRID_SIZE
+        self.position = (x, y)
+
+    def draw(self):
+        """Отрисовывает яблоко."""
+        rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, self.body_color, rect)
+        pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 def main():
     # Инициализация PyGame:
@@ -68,13 +89,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# Метод draw класса Apple
-# def draw(self):
-#     rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
-#     pygame.draw.rect(screen, self.body_color, rect)
-#     pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 # # Метод draw класса Snake
 # def draw(self):
