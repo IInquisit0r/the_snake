@@ -3,6 +3,8 @@ from random import choice, randint, random
 import pygame
 from pygame import rect
 
+from tests.conftest import apple, snake
+
 # Константы для размеров поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
@@ -102,8 +104,11 @@ class Snake (GameObject):
         self.last = self.positions[-1]
         x_new = (self.get_head_position()[0] + GRID_SIZE * self.direction[0])
         y_new = (self.get_head_position()[1] + GRID_SIZE * self.direction[1])
+        x_new = x_new % SCREEN_WIDTH
+        y_new = y_new % SCREEN_HEIGHT
         self.positions.insert(0, (x_new, y_new))
-        self.positions.pop()
+        if len(self.positions) > self.length:
+            self.positions.pop()
 
     def reset(self):
         """Сбрасывает змейку в начальное состояние."""
@@ -146,17 +151,26 @@ def handle_keys(game_object):
                 game_object.next_direction = RIGHT
 
 def main():
+    """Главная функция игры."""
     # Инициализация PyGame:
     pygame.init()
     # Тут нужно создать экземпляры классов.
-    ...
-
-    # while True:
-    #     clock.tick(SPEED)
-
-        # Тут опишите основную логику игры.
-        # ...
-
+    snake = Snake()
+    apple = Apple()
+    while True:
+        clock.tick(SPEED)
+        handle_keys(snake)
+        snake.update_direction()
+        snake.move()
+        if snake.get_head_position() == apple.position:
+            apple.randomize_position()
+            snake.length += 1
+        if snake.get_head_position() in snake.positions[1:]:
+            snake.reset()
+        screen.fill(BOARD_BACKGROUND_COLOR)
+        apple.draw()
+        snake.draw()
+        pygame.display.update()
 
 if __name__ == '__main__':
     main()
